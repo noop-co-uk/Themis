@@ -1,92 +1,90 @@
-# Guardian
-A library for guarding against invalid target values; e.g.
+# Themis
+Goddess of divine law and order. A library for validating against various
+invalid **target** scenarios.
 
-`Guardian.guard("target", target).againstNullValues();`
+For example:
+
+`Themis.validate("target", target).againstNullObjects();`
 
 ---
 
-## Sidekicks
-Guardian delegates the guarding of specific target types to `Sidekick`
+## Eunomia Instances
+Themis delegates the validating of specific **target** types to `Eunomia`
 instances.
 
 ---
 
-### StringSidekick
-A `Sidekick` for guarding against invalid `String` targets.
+### StringEunomia
+A `Eunomia` instance for validating against various invalid **target** `String`
+scenarios.
 
 ---
 
 #### Against Null Strings (`againstNullStrings()`)
-Guards against `null` values.
+Validates against `null` **target** values.
 
-This will result in a `GuardianNullTargetException` if the target `String` is
-`null`.
-
-For example;
+This will result in a `ThemisNullTargetException` if the **target** `String` is
+`null`:
 
 ```java
-public void setColour(final String colour) {
-  Guardian.guard("colour", colour).againstNullStrings();
-  this.colour = colour; // verfied not null
+public void setId(final String id) {
+  Themis.validate("id", id).againstNullStrings();
+  this.id = id; // 'id' is verfied not 'null'
 }
 ```
 
 ---
 
 #### Against Empty Strings (`againstEmptyStrings()`)
-Guards against empty values (`null` or an empty `String`).
+Validates against empty **target** values (`null` or an empty `String`).
 
-This will result in a `GuardianNullTargetException` if the target `String` is
-`null` or a `GuardianEmptyTargetException` if the target `String` is an empty
-`String`.
-
-For example;
+This will result in a `ThemisNullTargetException` if the **target** `String` is
+`null` or a `ThemisEmptyTargetException` if the **target** `String` is an empty
+`String`:
 
 ```java
-public void setDescription(final String description) {
-  Guardian.guard("description", description).againstEmptyStrings();
-  this.description = description; // verified not null or empty
+public void setId(final String id) {
+  Themis.validate("id", id).againstEmptyStrings();
+  this.id = id; // 'id' is verified not 'null' or empty
 }
 ```
 
 ---
 
 #### Against Blank Strings (`againstBlankStrings()`)
-Guards against blank values (`null`, empty `String` or a `String` containing
-only whitespace characters).
+Validates against blank **target** values (`null`, an empty `String` or a
+`String` containing  only whitespace characters).
 
-This will result in a `GuardianNullTargetException` if the target `String` is
-`null`, a `GuardianEmptyTargetException` if the target `String` is an empty
-`String` or a `GuardianBlankTargetStringException` if the target `String`
-contains only whitespace characters.
-
-For example;
+This will result in a `ThemisNullTargetException` if the **target** `String` is
+`null`, a `ThemisEmptyTargetException` if the **target** `String` is an empty
+`String` or a `ThemisBlankTargetStringException` if the **target** `String`
+contains only whitespace characters:
 
 ```java
-public void setName(final String name) {
-  Guardian.guard("name", name).againstBlankStrings();
-  this.name = name; // verified not null, empty or whitespace only
+public void setId(final String id) {
+  Themis.validate("id", id).againstBlankStrings();
+  this.id = id; // 'id' is verified not 'null', empty or
+                // only whitespace charecters
 }
 ```
 
 ---
 
-### ObjectSidekick
-A default `Sidekick` for guarding against invalid `Object` targets.
+### ObjectEunomia
+A default `Eunomia` instance for validating against various invalid **target**
+`Object` scenarios.
 
 ---
 
-#### Against Null Values (`againstNullValues()`)
-Guards against `null` values.
+#### Against Null Objects (`againstNullObjects()`)
+Validates against `null` **target** values.
 
-This will result in a `GuardianNullTargetException` if the target `Object` is
-`null`.
-
-For example;
+This will result in a `ThemisNullTargetException` if the **target** `Object` is
+`null`:
 
 ```java
-public void setStudent(final Student student) {
-  Guardian.guard("student", student).againstNullValues();
-  this.student = student; // verfied not null
+public void setData(final Object data) {
+  Themis.validate("data", data).againstNullObjects();
+  this.data = data; // 'data' is verfied not 'null'
 }
 ```

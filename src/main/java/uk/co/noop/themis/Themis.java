@@ -1,7 +1,12 @@
 package uk.co.noop.themis;
 
+import uk.co.noop.themis.eunomia.AbstractEunomia;
 import uk.co.noop.themis.eunomia.ObjectEunomia;
 import uk.co.noop.themis.eunomia.StringEunomia;
+import uk.co.noop.themis.exception.ThemisEunomiaException;
+import uk.co.noop.themis.exception.ThemisTargetException;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class Themis {
 
@@ -123,6 +128,28 @@ public class Themis {
     validate(targetName).againstBlankStrings();
 
     return new ObjectEunomia(targetName, target);
+  }
+
+  public static <E extends AbstractEunomia<T, E>, T> E validate(
+      final String targetName,
+      final T target,
+      final Class<E> eunomiaClass) {
+
+    validate(targetName).againstBlankStrings();
+
+    E eunomia = null;
+
+    try {
+
+      eunomia =
+          eunomiaClass.getConstructor(String.class, target.getClass())
+              .newInstance(targetName, target);
+
+    } catch (final Exception e) {
+      throw new ThemisEunomiaException(e);
+    }
+
+    return eunomia;
   }
 
   private static StringEunomia validate(final String targetName) {

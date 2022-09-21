@@ -70,6 +70,25 @@ public class Themis {
   }
 
   /**
+   * <p>Overloads {@link Themis#validate(String, String)}.</p>
+   *
+   * @param targetName The name of the <b>target</b> <code>String</code>.
+   * @param target The <b>target</b> <code>String</code>.
+   *
+   * @return A {@link StringEunomia} to validate the specified <b>target</b>
+   * <code>String</code>. This will never be <code>null</code>.
+   *
+   * @see Themis#validate(String, String)
+   * @see StringEunomia
+   */
+  public static StringEunomia themis(
+      final String targetName,
+      final String target) {
+
+    return validate(targetName, target);
+  }
+
+  /**
    * <p>Creates a new {@link ObjectEunomia} to validate the specified
    * <b>target</b> <code>Object</code>.</p>
    *
@@ -130,6 +149,25 @@ public class Themis {
     return new ObjectEunomia(targetName, target);
   }
 
+  /**
+   * <p>Overloads {@link Themis#validate(String, Object)}.</p>
+   *
+   * @param targetName The name of the <b>target</b> <code>Object</code>.
+   * @param target The <b>target</b> <code>Object</code>.
+   *
+   * @return An {@link ObjectEunomia} to validate the specified <b>target</b>
+   * <code>Object</code>. This will never be <code>null</code>.
+   *
+   * @see Themis#validate(String, Object)
+   * @see ObjectEunomia
+   */
+  public static ObjectEunomia themis(
+      final String targetName,
+      final Object target) {
+
+    return validate(targetName, target);
+  }
+
   public static <E extends AbstractEunomia<T, E>, T> E validate(
       final String targetName,
       final T target,
@@ -150,6 +188,14 @@ public class Themis {
     }
 
     return eunomia;
+  }
+
+  public static <E extends AbstractEunomia<T, E>, T> E themis(
+      final String targetName,
+      final T target,
+      final Class<E> eunomiaClass) {
+
+    return validate(targetName, target, eunomiaClass);
   }
 
   private static StringEunomia validate(final String targetName) {

@@ -3,8 +3,21 @@ package uk.co.noop.themis.eunomia;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+/**
+ * <p>A default Eunomia instance for validating against various invalid
+ * <b>target</b> <code>Object</code> scenarios.</p>
+ */
 public class ObjectEunomia extends AbstractEunomia<Object, ObjectEunomia> {
 
+  /**
+   * <p>Creates a new instance of <code>ObjectEunomia</code> using the specified
+   * <b>targetName</b> and <b>target</b>.</p>
+   *
+   * @param targetName The <b>target</b> name; this should not be
+   *                   <code>null</code>, empty or contain only whitespace
+   *                   characters but this is not validated.
+   * @param target The target.
+   */
   public ObjectEunomia(final String targetName, final Object target) {
     super(targetName, target);
   }
@@ -75,6 +88,11 @@ public class ObjectEunomia extends AbstractEunomia<Object, ObjectEunomia> {
     return againstInvalidValues(predicate);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @return <code>this</code> instance of <code>ObjectEunomia</code>.
+   */
   protected ObjectEunomia getEunomia() {
     return this;
   }

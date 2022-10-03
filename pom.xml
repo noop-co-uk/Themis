@@ -6,12 +6,14 @@
 
   <groupId>uk.co.noop</groupId>
   <artifactId>themis</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 
   <properties>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
-    <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>19</maven.compiler.source>
+    <maven.compiler.target>19</maven.compiler.target>
+    <junit-jupiter-api.version>5.9.1</junit-jupiter-api.version>
+    <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
   </properties>
 
   <distributionManagement>
@@ -30,5 +32,15 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

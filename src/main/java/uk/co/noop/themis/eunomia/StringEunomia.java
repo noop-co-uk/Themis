@@ -1,16 +1,35 @@
 package uk.co.noop.themis.eunomia;
 
 import uk.co.noop.themis.exception.ThemisBlankTargetStringException;
+import uk.co.noop.themis.exception.ThemisInvalidTargetException;
 
 import java.util.Objects;
 import java.util.function.Predicate;
 
+/**
+ * <p>A Eunomia instance for validating against various invalid <b>target</b>
+ * <code>String</code> scenarios.</p>
+ */
 public class StringEunomia extends AbstractEunomia<String, StringEunomia> {
 
+  /**
+   * <p>Creates a new instance of <code>StringEunomia</code> using the specified
+   * <b>targetName</b> and <b>target</b>.</p>
+   *
+   * @param targetName The <b>target</b> name; this should not be
+   *                   <code>null</code>, empty or contain only whitespace
+   *                   characters but this is not validated.
+   * @param target The target.
+   */
   public StringEunomia(final String targetName, final String target) {
     super(targetName, target);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @return <code>this</code> instance of <code>StringEunomia</code>.
+   */
   protected StringEunomia getEunomia() {
     return this;
   }
@@ -149,6 +168,13 @@ public class StringEunomia extends AbstractEunomia<String, StringEunomia> {
     return againstInvalidValues(predicate);
   }
 
+  /**
+   * <p>Returns a new {@link ThemisBlankTargetStringException}.</p>
+   *
+   * @return a new <code>ThemisBlankTargetStringException</code>.
+   *
+   * @see ThemisBlankTargetStringException
+   */
   private ThemisBlankTargetStringException blankTargetStringDetected() {
     return new ThemisBlankTargetStringException(getTargetName());
   }

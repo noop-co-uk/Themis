@@ -4,10 +4,11 @@ import uk.co.noop.themis.eunomia.AbstractEunomia;
 import uk.co.noop.themis.eunomia.ObjectEunomia;
 import uk.co.noop.themis.eunomia.StringEunomia;
 import uk.co.noop.themis.exception.ThemisEunomiaException;
-import uk.co.noop.themis.exception.ThemisTargetException;
 
-import java.lang.reflect.InvocationTargetException;
-
+/**
+ * <p>Goddess of divine law and order. A library for validating against various
+ * invalid <b>target</b> scenarios.</p>
+ */
 public class Themis {
 
   /**
@@ -168,6 +169,57 @@ public class Themis {
     return validate(targetName, target);
   }
 
+  /**
+   * <p>Creates a new custom Eunomia to validate the specified
+   * <b>target</b>.</p>
+   *
+   * <p>The returned Eunomia can be used to validate against various invalid
+   * <b>target</b> scenarios.</p>
+   *
+   * <p>For example:</p>
+   *
+   * <p>Given a <b>target</b> with the name <code>data</code>, you can validate
+   * against <code>null</code> values with the following;</p>
+   *
+   * <p><code>
+   * Themis.validate("data", data, CustomEunomia.class).againstNullValues();
+   * </code></p>
+   *
+   * <p>Depending on the custom Eunomia, this will likely result in a {@link
+   * uk.co.noop.themis.exception.ThemisNullTargetException
+   * ThemisNullTargetException} if <code>data</code> is <code>null</code> and is
+   * useful for parameter validation:</p>
+   *
+   * <p><code>
+   * public void setData(final CustomData data) {<br>
+   * &nbsp; Themis.validate("data", data, CustomEunomia.class)<br>
+   * &nbsp; &nbsp; .againstNullObjects();<br>
+   * &nbsp; this.data = data; // `data` is verified not `null`<br>
+   * }
+   * </code></p>
+   *
+   * <p>Note:</p>
+   *
+   * <p>The <b>targetName</b> parameter is validated against blank values using
+   * {@link StringEunomia#againstBlankStrings()}.</p>
+   *
+   * @param targetName The name of the <b>target</b>.
+   * @param target The <b>target</b>.
+   * @param eunomiaClass The type of the custom Eunomia.
+   * @param <E> The Eunomia type.
+   * @param <T> The <b>target</b> type.
+   *
+   * @return A custom Eunomia to validate the specified <b>target</b>. This will
+   * never be <code>null</code>.
+   *
+   * @throws uk.co.noop.themis.exception.ThemisTargetException Extensions of
+   * <code>ThemisTargetException</code> will be thrown for any invalid parameter
+   * scenarios.
+   *
+   * @see StringEunomia#againstBlankStrings()
+   * @see uk.co.noop.themis.exception.ThemisNullTargetException
+   * @see uk.co.noop.themis.exception.ThemisTargetException
+   */
   public static <E extends AbstractEunomia<T, E>, T> E validate(
       final String targetName,
       final T target,
@@ -175,7 +227,7 @@ public class Themis {
 
     validate(targetName).againstBlankStrings();
 
-    E eunomia = null;
+    E eunomia;
 
     try {
 
@@ -190,6 +242,20 @@ public class Themis {
     return eunomia;
   }
 
+  /**
+   * <p>Overloads {@link Themis#validate(String, Object, Class)}.</p>
+   *
+   * @param targetName The name of the <b>target</b>.
+   * @param target The <b>target</b>.
+   * @param eunomiaClass The type of the custom Eunomia.
+   * @param <E> The Eunomia type.
+   * @param <T> The <b>target</b> type.
+   *
+   * @return A custom Eunomia to validate the specified <b>target</b>. This will
+   * never be <code>null</code>.
+   *
+   * @see Themis#validate(String, Object, Class)
+   */
   public static <E extends AbstractEunomia<T, E>, T> E themis(
       final String targetName,
       final T target,
@@ -200,6 +266,10 @@ public class Themis {
 
   private static StringEunomia validate(final String targetName) {
     return new StringEunomia("targetName", targetName);
+  }
+
+  private Themis() {
+    super();
   }
 
 }

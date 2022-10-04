@@ -10,11 +10,13 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
- * <p>Themis delegates the validating of specific <b>target</b> types to Eunomia
- * instances.</p>
+ * <p>{@link uk.co.noop.themis.Themis Themis} delegates the validating of
+ * specific <b>target</b> types to Eunomia instances.</p>
  *
  * @param <T> the <b>target</b> type.
  * @param <E> the Eunomia type, i.e. the sub-class type.
+ *
+ * @see uk.co.noop.themis.Themis
  */
 public abstract class AbstractEunomia<T, E extends AbstractEunomia<T, E>> {
 

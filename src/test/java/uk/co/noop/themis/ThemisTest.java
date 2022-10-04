@@ -1,12 +1,14 @@
 package uk.co.noop.themis;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.co.noop.themis.eunomia.ObjectEunomia;
 import uk.co.noop.themis.eunomia.StringEunomia;
 import uk.co.noop.themis.exception.ThemisBlankTargetStringException;
 import uk.co.noop.themis.exception.ThemisEmptyTargetException;
 import uk.co.noop.themis.exception.ThemisNullTargetException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ThemisTest {
 
@@ -17,7 +19,7 @@ public class ThemisTest {
   @Test
   public void validateString_nullTargetName_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(null, TEST_TARGET_STRING));
   }
@@ -25,7 +27,7 @@ public class ThemisTest {
   @Test
   public void validateString_emptyTargetName_shouldThrowEmptyTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisEmptyTargetException.class,
         () -> Themis.validate("", TEST_TARGET_STRING));
   }
@@ -33,7 +35,7 @@ public class ThemisTest {
   @Test
   public void validateString_blankTargetName_shouldThrowBlankTargetString() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisBlankTargetStringException.class,
         () -> Themis.validate(" ", TEST_TARGET_STRING));
   }
@@ -41,7 +43,7 @@ public class ThemisTest {
   @Test
   public void validateString_shouldReturnStringEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         StringEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET_STRING).getClass());
   }
@@ -49,7 +51,7 @@ public class ThemisTest {
   @Test
   public void validateObject_nullTargetName_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(null, TEST_TARGET_OBJECT));
   }
@@ -57,7 +59,7 @@ public class ThemisTest {
   @Test
   public void validateObject_emptyTargetName_shouldThrowEmptyTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisEmptyTargetException.class,
         () -> Themis.validate("", TEST_TARGET_OBJECT));
   }
@@ -65,7 +67,7 @@ public class ThemisTest {
   @Test
   public void validateObject_blankTargetName_shouldThrowBlankTargetString() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisBlankTargetStringException.class,
         () -> Themis.validate(" ", TEST_TARGET_OBJECT));
   }
@@ -73,7 +75,7 @@ public class ThemisTest {
   @Test
   public void validateObject_shouldReturnObjectEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         ObjectEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET_OBJECT).getClass());
   }

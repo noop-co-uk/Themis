@@ -1,10 +1,12 @@
 package uk.co.noop.themis.eunomia;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.co.noop.themis.Themis;
 import uk.co.noop.themis.exception.ThemisInvalidTargetException;
 import uk.co.noop.themis.exception.ThemisNullTargetException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ObjectEunomiaTest {
 
@@ -15,7 +17,7 @@ public class ObjectEunomiaTest {
   @Test
   public void againstNullObjects_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, (Object) null)
             .againstNullObjects());
@@ -24,7 +26,7 @@ public class ObjectEunomiaTest {
   @Test
   public void againstNullObjects_shouldReturnObjectEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         ObjectEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstNullObjects()
@@ -34,7 +36,7 @@ public class ObjectEunomiaTest {
   @Test
   public void againstInvalidObjects_shouldThrowInvalidTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisInvalidTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, TEST_INVALID_TARGET)
             .againstInvalidObjects(t -> t instanceof Exception));
@@ -43,7 +45,7 @@ public class ObjectEunomiaTest {
   @Test
   public void againstInvalidObjects_shouldReturnObjectEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         ObjectEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstInvalidObjects(t -> t instanceof Exception)

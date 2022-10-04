@@ -1,12 +1,14 @@
 package uk.co.noop.themis.eunomia;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.co.noop.themis.Themis;
 import uk.co.noop.themis.exception.ThemisBlankTargetStringException;
 import uk.co.noop.themis.exception.ThemisEmptyTargetException;
 import uk.co.noop.themis.exception.ThemisInvalidTargetException;
 import uk.co.noop.themis.exception.ThemisNullTargetException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringEunomiaTest {
 
@@ -17,7 +19,7 @@ public class StringEunomiaTest {
   @Test
   public void againstNullStrings_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, null).againstNullStrings());
   }
@@ -25,7 +27,7 @@ public class StringEunomiaTest {
   @Test
   public void againstNullStrings_shouldReturnStringEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         StringEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstNullStrings()
@@ -35,7 +37,7 @@ public class StringEunomiaTest {
   @Test
   public void againstEmptyStrings_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, null).againstEmptyStrings());
   }
@@ -43,7 +45,7 @@ public class StringEunomiaTest {
   @Test
   public void againstEmptyStrings_shouldThrowEmptyTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisEmptyTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, "").againstEmptyStrings());
   }
@@ -51,7 +53,7 @@ public class StringEunomiaTest {
   @Test
   public void againstEmptyStrings_shouldReturnStringEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         StringEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstEmptyStrings()
@@ -61,7 +63,7 @@ public class StringEunomiaTest {
   @Test
   public void againstBlankStrings_shouldThrowNullTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisNullTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, null).againstBlankStrings());
   }
@@ -69,7 +71,7 @@ public class StringEunomiaTest {
   @Test
   public void againstBlankStrings_shouldThrowEmptyTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisEmptyTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, "").againstBlankStrings());
   }
@@ -77,7 +79,7 @@ public class StringEunomiaTest {
   @Test
   public void againstBlankStrings_shouldThrowBlankTargetString() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisBlankTargetStringException.class,
         () -> Themis.validate(TEST_TARGET_NAME, " ").againstBlankStrings());
   }
@@ -85,7 +87,7 @@ public class StringEunomiaTest {
   @Test
   public void againstBlankStrings_shouldReturnStringEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         StringEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstBlankStrings()
@@ -95,7 +97,7 @@ public class StringEunomiaTest {
   @Test
   public void againstInvalidStrings_shouldThrowInvalidTarget() {
 
-    Assertions.assertThrows(
+    assertThrows(
         ThemisInvalidTargetException.class,
         () -> Themis.validate(TEST_TARGET_NAME, TEST_INVALID_TARGET)
             .againstInvalidStrings(t -> t.equals(TEST_INVALID_TARGET)));
@@ -104,7 +106,7 @@ public class StringEunomiaTest {
   @Test
   public void againstInvalidStrings_shouldReturnStringEunomia() {
 
-    Assertions.assertEquals(
+    assertEquals(
         StringEunomia.class,
         Themis.validate(TEST_TARGET_NAME, TEST_TARGET)
             .againstInvalidStrings(t -> t.equals(TEST_INVALID_TARGET))
